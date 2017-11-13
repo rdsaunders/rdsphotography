@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
-  "dependencies": {},
+  "dependencies": {
+    "gulp-rename": "^1.2.2"
+  },
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-image-resize": "^0.13.0",

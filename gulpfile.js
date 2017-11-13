@@ -3,6 +3,7 @@ var imageResize  = require('gulp-image-resize');
 var webp         = require('gulp-webp');
 var imagemin     = require('gulp-imagemin');
 var newer        = require('gulp-newer');
+var rename       = require("gulp-rename");
 
 
 
@@ -15,20 +16,25 @@ gulp.task('images', function() {
 
 // Optimizes and copies image files.
 gulp.task('webp', function() {
-    return gulp.src('_photos/*.jpg')
+    return gulp.src([
+        '_photos/**/*.jpg'
+    ],  {base: './_photos/'}) 
         .pipe(webp())
-        .pipe(gulp.dest('photos'))
+        .pipe(gulp.dest('./photo-sets/'))
 });
 
 
 // Optimizes and copies image files.
 gulp.task('resize', function() {
-    return gulp.src('_photos/*.jpg')
+    return gulp.src([
+        '_photos/**/*.jpg'
+    ],  {base: './_photos/'}) 
     .pipe(imageResize({
         width : 500,
         crop : false,
         upscale : false
       }))
     .pipe(webp())
-    .pipe(gulp.dest('photos/resized'))
+    .pipe(rename(function (path) { path.basename += "-500"; }))
+    .pipe(gulp.dest('./photo-sets/'))
 });
